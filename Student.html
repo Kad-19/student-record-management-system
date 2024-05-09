@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/student-styles.css" />
+    <title>Student</title>
+  </head>
+  <body>
+    <datalist id="section-list">
+      <option value="1st year section A" />
+      <option value="1st year section B" />
+      <option value="1st year section C" />
+      <option value="1st year section D" />
+      <option value="1st year section E" />
+      <option value="2nd year section A" />
+      <option value="2nd year section B" />
+      <option value="2nd year section C" />
+      <option value="2nd year section D" />
+      <option value="2nd year section E" />
+      <option value="3rd year section A" />
+      <option value="3rd year section B" />
+      <option value="3rd year section C" />
+      <option value="3rd year section D" />
+      <option value="3rd year section E" />
+      <option value="4th year section A" />
+      <option value="4th year section B" />
+      <option value="4th year section C" />
+      <option value="4th year section D" />
+      <option value="4th year section E" />
+      <option value="5th year section A" />
+      <option value="5th year section B" />
+      <option value="5th year section C" />
+      <option value="5th year section D" />
+      <option value="5th year section E" />
+    </datalist>
+    <datalist id="course-code-list">
+      <option value="SWEG2106" />
+      <option value="SWEG2105" />
+      <option value="SWEG2104" />
+      <option value="SWEG2103" />
+      <option value="SWEG2102" />
+      <option value="SWEG2101" />
+      <option value="SWEG2107" />
+    </datalist>
+    <header>
+      <h1>Student Dashboard</h1>
+    </header>
+
+    <nav>
+      <label for="menu-click">
+        <img src="/images/menu.svg" alt="menu-icon" />
+      </label>
+      <input type="checkbox" id="menu-click" />
+      <div class="nav-sections">
+        <p id="university"></p>
+        <a class="logout" href="index.html"
+          ><img src="./images/logout.svg" alt="logout icon" />Logout</a
+        >
+        <a href="#personal-records">Personal Records</a>
+        <a href="#announcements">Announcements</a>
+        <a href="#class-schedule">Class Schedule</a>
+        <a href="#my-grade">My Grade</a>
+        <a href="#my-courses">My Courses</a>
+        <a href="#register-new-semester">Semester registration</a>
+        <a href="#add-course">Add Courses</a>
+        <a href="#drop-course">Drop Courses</a>
+        <a href="changePassword.html">Change Password</a>
+      </div>
+    </nav>
+
+    <main>
+      <article id="warning" class="invisible">
+        <div id="popup">
+          <div id="warning-message"></div>
+          <button id="close-btn">Ok</button>
+        </div>
+      </article>
+      <section id="personal-records">
+        <h2>Personal Records</h2>
+        <div class="profile-wrapper">
+          <p>Student Name : Kidus Hawoltu</p>
+          <p>Student Id : 0925/14</p>
+          <p>Department : Software Engineering</p>
+          <p>Status : Withdrawal</p>
+          <p>Year : 3</p>
+          <p>Semister : 1</p>
+          <p>Section : C</p>
+          <p>Semister Load : 0</p>
+          <p>CGPA : 3.8</p>
+        </div>
+      </section>
+
+      <section id="announcements">
+        <h2>Announcements</h2>
+        <div class="announcement-wrapper">
+          <article>
+            <p>We have class tomorrow</p>
+            <p class="time">Teacher A</p>
+            <p class="time">13/01/2024 2pm</p>
+          </article>
+          <article>
+            <p>We have class tomorrow</p>
+            <p class="time">Teacher B</p>
+            <p class="time">13/01/2024 2pm</p>
+          </article>
+          <article>
+            <p>We have class tomorrow</p>
+            <p class="time">Teacher C</p>
+            <p class="time">13/01/2024 2pm</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="class-schedule">
+        <h2>Class Schedule</h2>
+        <div class="table-wrapper">
+          <table class="fl-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>02 : 30 - 04 : 30 AM</th>
+                <td>Computer Architecure</td>
+                <td>Object Oriented Programming</td>
+                <td>Object Oriented Programming</td>
+                <td>System Analysis</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>04 : 30 - 06 : 30 AM</th>
+                <td>Data Structures and Algorithm</td>
+                <td>Internet Programming I</td>
+                <td></td>
+                <td></td>
+                <td>System Analysis</td>
+              </tr>
+              <tr>
+                <th>08 : 00 - 10 : 00 AM</th>
+                <td>Data Structures and Algorithm</td>
+                <td>Internet Programming I</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="my-grade">
+        <h2>My Grade</h2>
+        <div class="search-wrapper">
+          <div class="search">
+            <input type="text" placeholder="Course Code" id="grade-search" />
+            <img src="./images/search.svg" />
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="fl-table" id="my-grade-table">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Grade</th>
+                <th>Grade Mark</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr>
+                <th>CGPA</th>
+                <td>4.0</td>
+                <td>Pass</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <h2>Semister Grade</h2>
+        <div class="table-wrapper">
+          <table class="fl-table">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Test</th>
+                <th>Lab Test</th>
+                <th>Quiz</th>
+                <th>Project</th>
+                <th>Final Exam</th>
+                <th>Total</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>Internet Programming I</td>
+                <td>SWEG3107</td>
+                <td>15</td>
+                <td>10</td>
+                <td>5</td>
+                <td>20</td>
+                <td>37</td>
+                <td>87</td>
+                <td>A</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="my-courses">
+        <h2>My Courses</h2>
+        <div class="search-wrapper">
+          <div class="search">
+            <input type="text" placeholder="Course code" id="course-search" />
+            <img src="./images/search.svg" />
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="fl-table" id="my-courses-table">
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Course Code</th>
+                <th>Grade</th>
+                <th>Grade Mark</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+      <section id="add-course">
+        <h2>Add courses</h2>
+        <form id="add-course-form">
+          <div class="">
+            <label for="course-code1">Course Code</label>
+            <input
+              type="text"
+              id="course-code1"
+              list="course-code-list"
+              placeholder="Course code"
+              required
+            />
+          </div>
+          <div class="">
+            <label for="sec">Section</label>
+            <input type="text" id="sec" list="section-list" placeholder="Section" required />
+          </div>
+          <button type="submit" value="Add Course" class="submit-btn">
+            Add Course
+          </button>
+        </form>
+      </section>
+      <section id="register-new-semester">
+        <h2>Register for a new Semester</h2>
+        <form id="register-new-semester-form">
+          <div>
+            <label>What services would you demand</label><br>
+            
+          </div>
+          <div>
+            <label for="food">Food</label>
+            <select id="food">
+              <option>--service-type--</option>
+              <option>In kind</option>
+              <option>In cash</option>
+            </select>
+            
+          </div>
+          <div>
+            <label for="boarding">Boarding</label>
+            <select id="boarding">
+              <option>--service-type--</option>
+              <option>In kind</option>
+              <option>In cash</option>
+            </select>
+            
+          </div>
+          <button type="submit" value="Register" class="submit-btn">Register</button>
+        </form>
+      </section>
+      <section id="drop-course">
+        <h2>Drop courses</h2>
+        <form id="drop-course-form">
+          <div class="">
+            <label for="course-code2">Course Code</label>
+            <input
+              type="text"
+              id="course-code2"
+              list="course-code-list"
+              placeholder="Course code"
+              required
+            />
+          </div>
+          <input type="submit" value="Drop Course" class="submit-btn" />
+        </form>
+      </section>
+    </main>
+    <script src="./script/student.js"></script>
+  </body>
+</html>
