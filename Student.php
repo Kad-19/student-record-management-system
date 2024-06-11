@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['role'] != 'student'){
+if($_SESSION['role'] != 'Student'){
   header("Location: http://localhost/student-record-management-system/login.html");
 }
 ?>
