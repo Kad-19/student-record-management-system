@@ -15,7 +15,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $role = test_input($_POST['role']);
     $university = test_input($_POST['university']);
-    $email = $_POST['email'];
+    $email = test_input($_POST['email']);
     $password = test_input($_POST['password']);
 
     $statement = $conn->prepare("SELECT university, password, id FROM $role WHERE email='$email'");

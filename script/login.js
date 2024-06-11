@@ -38,7 +38,13 @@ function redirect (role, auth){
 //   }
 // });
 
-// const closeBtn = document.getElementById("close-btn");
-// closeBtn.addEventListener("click", () => {
-//   popupElement.classList.add("invisible");
-// });
+const closeBtn = document.getElementById("close-btn");
+closeBtn.addEventListener("click", () => {
+  popupElement.classList.add("invisible");
+});
+
+function showAlert(title, description) {
+  document.getElementById('alert-title').innerText = title;
+  document.getElementById('alert-description').innerText = description;
+  document.getElementById('alert-section').classList.remove('invisible');
+}
