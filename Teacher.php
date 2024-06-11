@@ -58,7 +58,6 @@ if($_SESSION['role'] != 'Teacher'){
         <a href="#announcement">Announcement</a>
         <a href="#courses">Courses</a>
         <a href="#gradebook">Grade Book</a>
-        <a href="#attendance">Attendance</a>
         <a href="#class-schedule">Class Schedule</a>
         <a href="changePassword.html">Change Password</a>
       </div>
@@ -113,6 +112,7 @@ if($_SESSION['role'] != 'Teacher'){
       
       <section id="courses">
         <h2>Courses</h2>
+        
         <div class="search-wrapper">
           <div class="search">
             <input type="text" placeholder="Course code" id="course-search"/>
@@ -142,6 +142,16 @@ if($_SESSION['role'] != 'Teacher'){
 
       <section id="gradebook">
         <h2>Grade Book</h2>
+        <h2>
+          <input type="text" value="" list="" placeholder="year"/>
+          <input
+                  type="text"
+                  value=""
+                  list="section-list"
+                  placeholder="Section"
+                />
+
+        </h2>
         <div class="search-wrapper">
           <div class="search">
             <input type="text" placeholder="Student Id" id="grade-search"/>
@@ -166,38 +176,6 @@ if($_SESSION['role'] != 'Teacher'){
             <tbody>
               
             </tbody>
-          </table>
-          <form>
-            <button type="submit" class="submit-btn" value="Save Changes">
-              Save Changes
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <section id="attendance">
-        <h2>Attendance</h2>
-        <div class="search-wrapper">
-          <div class="search">
-            <input type="text" placeholder="Student Id" id="attendance-search"/>
-            <img src="./images/search.svg">
-          </div>
-        </div>
-        <div class="table-wrapper">
-          <table class="fl-table" id="attendance-table">
-            <thead>
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>ID</th>
-                <th>Date 1</th>
-                <th>Date 2</th>
-                <th>Date 3</th>
-                <th>Date 4</th>
-                <th>Date 5</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
           </table>
           <form>
             <button type="submit" class="submit-btn" value="Save Changes">

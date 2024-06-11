@@ -30,6 +30,7 @@ if($_SESSION['role'] != 'Admin'){
         <a href="#students-information">Students Information</a>
         <a href="#course-information">Course Information</a>
         <a href="#register-student">Register a Student</a>
+        <a href="#register-teacher">Register a Teacher</a>
         <a href="#update-student">Update a Student</a>
         <a href="#add-new-course">Add a New Course</a>
         <a href="#update-course">Update a Course</a>
@@ -209,6 +210,29 @@ if($_SESSION['role'] != 'Admin'){
           </div>
           <button type="submit" class="submit-btn" id="register-submit">
             Register Student
+          </button>
+        </form>
+      </section>
+      <section id="register-teacher">
+        <h2>Register a Teacher</h2>
+        <form id="register-student-form" method="post" action="back/registerTeacher.php">
+          
+          <div class="">
+            <label for="id">Id</label>
+            <input type="text" id="id" name="id" placeholder="ETS0000/10" required />
+          </div> 
+          <div>
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email@gmail.com"
+              required
+            />
+          </div>
+          <button type="submit" class="submit-btn" id="register-submit">
+            Register Teacher
           </button>
         </form>
       </section>
