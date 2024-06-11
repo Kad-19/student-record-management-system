@@ -36,13 +36,33 @@
       <option value="5th year section E" />
     </datalist>
     <datalist id="course-code-list">
-      <option value="SWEG2106" />
-      <option value="SWEG2105" />
-      <option value="SWEG2104" />
-      <option value="SWEG2103" />
-      <option value="SWEG2102" />
-      <option value="SWEG2101" />
-      <option value="SWEG2107" />
+      <?php
+        $servername = "localhost";
+        $port = "3307"; // Specify the port separately
+        $username = "root";
+        $dbpassword = "";
+        $database = "SRMS";
+        $dsn = "mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4";
+        try{
+          $conn = new PDO($dsn, $username, $dbpassword);
+          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+          $statement = $conn->prepare("SELECT course_code FROM courses");
+          $statement->execute();
+  
+          $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+          foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+            echo "
+              <option value ='".$value['course_code']."' />
+            ";
+          } 
+  
+          $conn = NULL;
+        }
+        catch(PDOException $e){
+          echo "<option value='".$e->getMessage()."' />";
+        }
+      ?>
     </datalist>
     <header>
       <h1>Student Dashboard</h1>
@@ -55,7 +75,7 @@
       <input type="checkbox" id="menu-click" />
       <div class="nav-sections">
         <p id="university"></p>
-        <a class="logout" href="index.html"
+        <a class="logout" href="index.php"
           ><img src="./images/logout.svg" alt="logout icon" />Logout</a
         >
         <a href="#personal-records">Personal Records</a>
@@ -80,15 +100,41 @@
       <section id="personal-records">
         <h2>Personal Records</h2>
         <div class="profile-wrapper">
-          <p>Student Name : Kidus Hawoltu</p>
-          <p>Student Id : 0925/14</p>
-          <p>Department : Software Engineering</p>
-          <p>Status : Withdrawal</p>
-          <p>Year : 3</p>
-          <p>Semister : 1</p>
-          <p>Section : C</p>
-          <p>Semister Load : 0</p>
-          <p>CGPA : 3.8</p>
+          <?php
+            $servername = "localhost";
+            $port = "3307"; // Specify the port separately
+            $username = "root";
+            $dbpassword = "";
+            $database = "SRMS";
+            $dsn = "mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4";
+            try{
+              $conn = new PDO($dsn, $username, $dbpassword);
+              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+              $statement = $conn->prepare("SELECT id, fname, lname, department, status, year, semester, section, semester_load, cgpa FROM student where id = '" . $_SESSION['id'] . "'");
+              $statement->execute();
+  
+              $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+              foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+                echo "
+                  <p>Student Name : ".$value['fname']." ".$value['lname']."</p>
+                  <p>Student Id : ".$value['id']."</p>
+                  <p>Department : ".$value['department']."</p>
+                  <p>Status : ".$value['status']."</p>
+                  <p>Year : ".$value['year']."</p>
+                  <p>Semester : ".$value['semester']."</p>
+                  <p>Section : ".$value['section']."</p>
+                  <p>Semester Load : ".$value['semester_load']."</p>
+                  <p>CGPA : ".$value['cgpa']."</p>
+                ";
+              } 
+  
+              $conn = NULL;
+            }
+            catch(PDOException $e){
+              echo $e->getMessage();
+            }
+          ?>
         </div>
       </section>
 
@@ -178,7 +224,9 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              
+            </tbody>
             <tfoot>
               <tr>
                 <th>CGPA</th>
@@ -205,72 +253,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
-              <tr>
-                <td>Internet Programming I</td>
-                <td>SWEG3107</td>
-                <td>15</td>
-                <td>10</td>
-                <td>5</td>
-                <td>20</td>
-                <td>37</td>
-                <td>87</td>
-                <td>A</td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
@@ -303,52 +286,61 @@
                 $dbpassword = "";
                 $database = "SRMS";
                 $dsn = "mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4";
-                $conn = new PDO($dsn, $username, $dbpassword);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                try{
+                  $conn = new PDO($dsn, $username, $dbpassword);
+                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $statement = $conn->prepare("SELECT coursecode, coursename, grade, grademark, status FROM mycourse WHERE studid='" . $_SESSION['id'] . "'");
-                $statement->execute();
+                  $statement = $conn->prepare("SELECT coursecode, coursename, grade, grademark, status FROM mycourse WHERE studid='" . $_SESSION['id'] . "'");
+                  $statement->execute();
 
-                $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
-                    echo "
-                        <tr>
-                            <td>".$value['coursename']."</td>
-                            <td>".$value['coursecode']."</td>
-                            <td>".$value['grade']."</td>
-                            <td>".$value['grademark']."</td>
-                            <td>".$value['status']."</td>
-                        </tr>
-                    ";
+                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                  foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+                      echo "
+                          <tr>
+                              <td>".$value['coursename']."</td>
+                              <td>".$value['coursecode']."</td>
+                              <td>".$value['grade']."</td>
+                              <td>".$value['grademark']."</td>
+                              <td>".$value['status']."</td>
+                          </tr>
+                      ";
+                  }
+                  $conn = NULL;
+                }
+                catch(PDOException $e){
+                  echo $e->getMessage();
                 }
               ?>
             </tbody>
           </table>
         </div>
       </section>
+
       <section id="add-course">
         <h2>Add courses</h2>
-        <form id="add-course-form">
+        <form id="add-course-form" method="post" action="back/addCourse.php">
           <div class="">
             <label for="course-code1">Course Code</label>
             <input
               type="text"
               id="course-code1"
+              name="course-code"
               list="course-code-list"
               placeholder="Course code"
               required
             />
           </div>
-          <div class="">
+          <!-- <div class="">
             <label for="sec">Section</label>
             <input type="text" id="sec" list="section-list" placeholder="Section" required />
-          </div>
+          </div> -->
           <button type="submit" value="Add Course" class="submit-btn">
             Add Course
           </button>
         </form>
       </section>
-      <section id="register-new-semester">
+
+      <section id="register-new-semester" method="post" action="back/registerNewSemester.php">
         <h2>Register for a new Semester</h2>
         <form id="register-new-semester-form">
           <div>
@@ -376,7 +368,8 @@
           <button type="submit" value="Register" class="submit-btn">Register</button>
         </form>
       </section>
-      <section id="drop-course">
+
+      <section id="drop-course" method="post" action="back/dropCourse.php">
         <h2>Drop courses</h2>
         <form id="drop-course-form">
           <div class="">
@@ -384,6 +377,7 @@
             <input
               type="text"
               id="course-code2"
+              name="course-code"
               list="course-code-list"
               placeholder="Course code"
               required
@@ -393,6 +387,6 @@
         </form>
       </section>
     </main>
-    <!-- <script src="./script/student.js"></script> -->
+    <script src="./script/student.js"></script>
   </body>
 </html>

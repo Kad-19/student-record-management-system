@@ -46,7 +46,7 @@
       <input type="checkbox" id="menu-click" />
       <div class="nav-sections">
         <p id="university"></p>
-        <a class="logout" href="index.html"
+        <a class="logout" href="index.php"
           ><img src="./images/logout.svg" alt="logout icon" />Logout</a
         >
         <a href="#announcement">Announcement</a>
@@ -105,7 +105,6 @@
         </div>
       </section>
       
-
       <section id="courses">
         <h2>Courses</h2>
         <div class="search-wrapper">
@@ -201,6 +200,7 @@
           </form>
         </div>
       </section>
+      
       <section id="class-schedule">
         <h2>Class Schedule</h2>
         <div class="table-wrapper">

@@ -13,25 +13,14 @@ try {
     $conn = new PDO($dsn, $username, $dbpassword);
     // Set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $role = test_input($_POST['role']);
-    $university = test_input($_POST['university']);
-    $email = $_POST['email'];
-    $password = test_input($_POST['password']);
+    
+    $course_code = test_input($_POST['course-code']);
 
-    $statement = $conn->prepare("SELECT university, password, id FROM $role WHERE email='$email'");
+    $statement = $conn->prepare("DELETE FROM mycourse WHERE courseCode='$course_code' AND studid='".$_SESSION['id']."' AND status='Registered'");
     $statement->execute();
+    header("Location: http://localhost/student-record-management-system/student.php#drop-course");
 
-    foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k=>$value){
-        if($university == $value['university'] && $password == $value['password']){
-            $_SESSION['role'] = $role;
-            $_SESSION['id'] = $value['id'];
-            $_SESSION['university'] = $university;
-            header("Location: http://localhost/student-record-management-system/$role.php");
-        }
-        else{
-            header("Location: http://localhost/student-record-management-system/login.html");
-        }
-    }
+    $conn = NULL;
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message
     echo "Connection failed: " . $e->getMessage();

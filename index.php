@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  $_SESSION['id'] = "";
+  $_SESSION['role'] = "";
+  $_SESSION['university'] = "";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,7 +21,7 @@
         <label for="uni">Universities</label>
         <input type="checkbox" id="uni" />
         <a href="#address">Contact</a>
-        <a href="login.html" target="_blank">Login</a>
+        <a href="login.html">Login</a>
         <div class="universities-dropdown">
           <a href="http://www.aastu.edu.et/" target="_blank">AASTU</a>
           <a href="https://www.aau.edu.et/" target="_blank">AAU</a>
