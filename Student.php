@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if($_SESSION['role'] != 'student'){
+  header("Location: http://localhost/student-record-management-system/login.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
