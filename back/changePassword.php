@@ -34,7 +34,7 @@ try {
 
     $statement = $conn->prepare("UPDATE ".$_SESSION['role']." SET password='$newPassword' WHERE id='".$_SESSION['id']."'");
     $statement->execute();
-    header("Location: http://localhost/student-record-management-system/login.html");
+    header("Location: http://localhost/student-record-management-system/".$_SESSION['role'].".php");
 
     $conn = NULL;
 } catch (PDOException $e) {
