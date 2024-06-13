@@ -28,10 +28,12 @@ try {
     if($statement->fetchColumn() == 0 && ($prerequisite == "" || $statement2->fetchColumn() != 0)){
         $statement = $conn->prepare("INSERT INTO courses VALUES ('$course_code', '$course_name', $credit_hour, '$department', $year, $semester, '$prerequisite')");
         $statement->execute();
-        header("Location: http://localhost/student-record-management-system/admin.php#add-new-course");
+        include "Alert.php";
+        show_alert("", "You have successfully added ".$course_name, "http://localhost/student-record-management-system/admin.php#add-new-course");
     }
     else{
-        echo "A course with this code already exists or the prerequisite doesn't exist!";
+        include "Alert.php";
+        show_alert("", "A course with this code already exists or the prerequisite does not exist!", "http://localhost/student-record-management-system/admin.php#add-new-course");
     }
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message

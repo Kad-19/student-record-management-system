@@ -32,10 +32,12 @@ try {
     if($statement->fetchColumn() == 0 && $statement2->fetchColumn() == 0){
         $statement = $conn->prepare("INSERT INTO student VALUES ('$id', '$fname', '$lname', '$department', '$status', $year, $semester, '$section', '$university', 0, 0, '$password', '$email')");
         $statement->execute();
-        header("Location: http://localhost/student-record-management-system/admin.php#register-student");
+        include "Alert.php";
+        show_alert("", "You have successfully registered the student", "http://localhost/student-record-management-system/admin.php#register-student");
     }
     else{
-        echo "A student with this id or email already exists!";
+        include "Alert.php";
+        show_alert("", "A student with this id or email already exists!", "http://localhost/student-record-management-system/admin.php#register-student");
     }
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message

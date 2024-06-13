@@ -14,18 +14,20 @@ try{
     $course_code = test_input($_POST['course-code']);
     
     $statement1 = $conn->prepare("SELECT course_name FROM courses WHERE course_code='$course_code'");
+    $statement1->execute();
     foreach($statement1->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
-        echo "executed";
         $course_name = $value['course_name'];
-        $statement = $conn->prepare("INSERT INTO mycourse(studid, coursename, coursecode, status) VALUES('".$_SESSION['id']."', '$course_name', '$course_code', 'Registered')");
+        $statement = $conn->prepare("INSERT INTO mycourse(studid, coursename, coursecode, teacherid, status) VALUES('".$_SESSION['id']."', '$course_name', '$course_code', 8, 'Registered')");
         $statement->execute();
-        header("Location: http://localhost/student-record-management-system/student.php#add-course");
-        }
-        $conn = NULL;
+        include "Alert.php";
+        show_alert("", "You have successfully added ".$course_name, "http://localhost/student-record-management-system/student.php#add-course");
+    }
+    $conn = NULL;
 }
 catch(PDOException $e){
     echo $e->getMessage();
-    }
+    var_dump($e);
+}
 
 function test_input($data){
     $data = trim($data);

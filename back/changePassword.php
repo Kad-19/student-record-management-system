@@ -18,23 +18,26 @@ try {
     $newPassword = test_input($_POST['new-password']);
     $confirmPassword = test_input($_POST['confirm-password']);
 
-    if($newPassword != $confirmPassword){
-        header("Location: http://localhost/student-record-management-system/changePassword.html");
-        die("New password and Confirm password don't match");
-    }
-
-    $statement = $conn->prepare("SELECT password from ".$_SESSION['role']." where id = '".$_SESSION['id']."'");
-    $statement->execute();
-    foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
-        if($currentPassword != $value['password']){
-            header("Location: http://localhost/student-record-management-system/changePassword.html");
-            die("Incorrect Old password");
+    if($newPassword == $confirmPassword){
+        $statement = $conn->prepare("SELECT password from ".$_SESSION['role']." where id = '".$_SESSION['id']."'");
+        $statement->execute();
+        foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+            if($currentPassword == $value['password']){
+                $statement = $conn->prepare("UPDATE ".$_SESSION['role']." SET password='$newPassword' WHERE id='".$_SESSION['id']."'");
+                $statement->execute();
+                include "Alert.php";
+                show_alert("", "You have successfully changed your password", "http://localhost/student-record-management-system/".$_SESSION['role'].".php");
+            }
+            else{
+                include "Alert.php";
+                show_alert("", "Incorrect Old password", "http://localhost/student-record-management-system/changePassword.html");
+            }
         }
     }
-
-    $statement = $conn->prepare("UPDATE ".$_SESSION['role']." SET password='$newPassword' WHERE id='".$_SESSION['id']."'");
-    $statement->execute();
-    header("Location: http://localhost/student-record-management-system/".$_SESSION['role'].".php");
+    else{
+        include "Alert.php";
+        show_alert("", "New password and Confirm password do not match", "http://localhost/student-record-management-system/changePassword.html");
+    }
 
     $conn = NULL;
 } catch (PDOException $e) {

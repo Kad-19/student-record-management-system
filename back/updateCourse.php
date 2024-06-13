@@ -26,10 +26,12 @@ try {
     if($prerequisite == "" || $statement2->fetchColumn() != 0){
         $statement = $conn->prepare("UPDATE courses SET course_name='$course_name', credit_hour=$credit_hour, department='$department', year=$year, semester=$semester, prerequisite='$prerequisite' WHERE course_code='$course_code'");
         $statement->execute();
-        header("Location: http://localhost/student-record-management-system/admin.php#update-course");
+        include "Alert.php";
+        show_alert("", "You have successfully updated ".$course_name, "http://localhost/student-record-management-system/admin.php#update-course");
     }
     else{
-        echo "The prerequisite doesn't exist!";
+        include "Alert.php";
+        show_alert("", "The prerequisite does not exist!", "http://localhost/student-record-management-system/admin.php#update-course");
     }
 
     $conn = NULL;

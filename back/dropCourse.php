@@ -18,7 +18,8 @@ try {
 
     $statement = $conn->prepare("DELETE FROM mycourse WHERE courseCode='$course_code' AND studid='".$_SESSION['id']."' AND status='Registered'");
     $statement->execute();
-    header("Location: http://localhost/student-record-management-system/student.php#drop-course");
+    include "Alert.php";
+    show_alert("", "You have successfully dropped ".$course_code, "http://localhost/student-record-management-system/student.php#drop-course");
 
     $conn = NULL;
 } catch (PDOException $e) {

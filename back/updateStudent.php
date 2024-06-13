@@ -17,19 +17,14 @@ try {
     $fname = test_input($_POST['fname1']);
     $lname = test_input($_POST['lname1']);
     $department = test_input($_POST['department']);
-    $status = test_input($_POST['status']);
     $section = test_input($_POST['section']);
+    $status = test_input($_POST['status']);
     if($status == "Readmition") $status = "Active";
-
-    $year = 1;
-    $semester = 1;
-    $university = $_SESSION['university'];
-    $password = $lname . "12345";
-    $email = test_input($_POST['email']);
 
     $statement = $conn->prepare("UPDATE student SET fname='$fname', lname='$lname', department='$department', section='$section', status='$status' WHERE id='$id'");
     $statement->execute();
-    header("Location: http://localhost/student-record-management-system/admin.php#update-student");
+    include "Alert.php";
+    show_alert("", "You have successfully updated ".$id, "http://localhost/student-record-management-system/admin.php#update-student");
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message
     echo "Connection failed: " . $e->getMessage();

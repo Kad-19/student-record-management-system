@@ -30,7 +30,7 @@ try {
         }
     }
     include "Alert.php";
-    show_alert("test", "it works", "http://localhost/student-record-management-system/login.html");
+    show_alert("Login Failed", "This account is not found in database", "http://localhost/student-record-management-system/login.html");
 
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message

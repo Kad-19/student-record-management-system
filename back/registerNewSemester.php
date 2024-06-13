@@ -23,8 +23,10 @@ try {
             $year += 1;
             $semester = 1;
         }
-        $statement1 = $conn->prepare("UPDATE student SET year=$year, $semester=$semester WHERE id='".$_SESSION['id']."'");
+        $statement1 = $conn->prepare("UPDATE student SET year=$year, semester=$semester WHERE id='".$_SESSION['id']."'");
         $statement1->execute();
+        include "Alert.php";
+        show_alert("", "You have successfully registered for new semester!!", "http://localhost/student-record-management-system/student.php?#register-new-semester");
     }
 
     $conn = NULL;

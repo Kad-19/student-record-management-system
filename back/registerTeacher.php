@@ -25,10 +25,12 @@ try {
     if($statement->fetchColumn() == 0 && $statement2->fetchColumn() == 0){
         $statement = $conn->prepare("INSERT INTO teacher VALUES ('$id', '$university', '$password', '$email')");
         $statement->execute();
-        header("Location: http://localhost/student-record-management-system/admin.php#register-teacher");
+        include "Alert.php";
+        show_alert("", "You have successfully registered the teacher", "http://localhost/student-record-management-system/admin.php#register-teacher");
     }
     else{
-        echo "A Teacher with this id or email already exists!";
+        include "Alert.php";
+        show_alert("", "A teacher with this id or email already exists!", "http://localhost/student-record-management-system/admin.php#register-teacher");
     }
 } catch (PDOException $e) {
     // If connection fails, catch the exception and display the error message
