@@ -129,12 +129,43 @@ if($_SESSION['role'] != 'Teacher'){
                 <th>Department</th>
                 <th>Year</th>
                 <th>Semester</th>
-                <th>Class Section</th>
-                <th>Number of Students</th>
               </tr>
             </thead>
             <tbody>
-              
+              <?php
+                $servername = "localhost";
+                $port = "3307"; // Specify the port separately
+                $username = "root";
+                $dbpassword = "";
+                $database = "SRMS";
+                $dsn = "mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4";
+                try{
+                  $conn = new PDO($dsn, $username, $dbpassword);
+                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+                  $statement = $conn->prepare("SELECT course_code, course_name, credit_hour, department, year, semester FROM courses WHERE course_code IN (SELECT courseCode FROM mycourse WHERE teacherid = " . $_SESSION['id'] . ")");
+                  $statement->execute();
+          
+                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                  foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+                    echo "
+                      <tr>
+                        <td>".$value['course_code']."</td>
+                        <td>".$value['course_name']."</td>
+                        <td>".$value['credit_hour']."</td>
+                        <td>".$value['department']."</td>
+                        <td>".$value['year']."</td>
+                        <td>".$value['semester']."</td>
+                      </tr>
+                    ";
+                  } 
+          
+                  $conn = NULL;
+                }
+                catch(PDOException $e){
+                  echo "<option value='".$e->getMessage()."' />";
+                }
+              ?>
             </tbody>
           </table>
         </div>
@@ -165,16 +196,51 @@ if($_SESSION['role'] != 'Teacher'){
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>ID</th>
-                <th>Test</th>
-                <th>Lab Test</th>
-                <th>Quiz</th>
-                <th>Project</th>
-                <th>Final Exam</th>
-                <th>Total</th>
+                <th>Course</th>
+                <th>Grade Mark</th>
+                <th>Grade</th>
               </tr>
             </thead>
             <tbody>
-              
+            <?php
+                $servername = "localhost";
+                $port = "3307"; // Specify the port separately
+                $username = "root";
+                $dbpassword = "";
+                $database = "SRMS";
+                $dsn = "mysql:host=$servername;port=$port;dbname=$database;charset=utf8mb4";
+                try{
+                  $conn = new PDO($dsn, $username, $dbpassword);
+                  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+                  $statement = $conn->prepare("SELECT s.fname AS fname, s.lname AS lname ,studid, courseName, grademark, grade FROM student AS s JOIN mycourse AS m WHERE s.id = m.studid AND teacherid = " . $_SESSION['id']);
+                  $statement->execute();
+          
+                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                  foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
+                    echo "
+                      <tr>
+                        <td>".$value['fname']."</td>
+                        <td>".$value['lname']."</td>
+                        <td>".$value['studid']."</td>
+                        <td>".$value['courseName']."</td>
+                      ";
+                      if($value['grade'] == '' || $value['grade'] == NULL) echo "<td>-</td><td>-</td>";
+                      else{
+                        echo "
+                          <td>".$value['grademark']."</td>
+                          <td>".$value['grade']."</td>
+                        ";
+                      }
+                      echo "</tr>";
+                  } 
+          
+                  $conn = NULL;
+                }
+                catch(PDOException $e){
+                  echo $e->getMessage();
+                }
+              ?>
             </tbody>
           </table>
           <form>

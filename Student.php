@@ -301,13 +301,20 @@ if($_SESSION['role'] != 'Student'){
                   $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                   foreach($statement->fetchAll(PDO::FETCH_ASSOC) as $k => $value){
                       echo "
-                          <tr>
-                              <td>".$value['coursename']."</td>
-                              <td>".$value['coursecode']."</td>
-                              <td>".$value['grade']."</td>
-                              <td>".$value['grademark']."</td>
-                              <td>".$value['status']."</td>
-                          </tr>
+                        <tr>
+                            <td>".$value['coursename']."</td>
+                            <td>".$value['coursecode']."</td>
+                      ";
+                      if($value['grade'] == '' || $value['grade'] == NULL) echo "<td>-</td><td>-</td>";
+                      else{
+                        echo "
+                          <td>".$value['grademark']."</td>
+                          <td>".$value['grade']."</td>
+                        ";
+                      }
+                      echo "
+                            <td>".$value['status']."</td>
+                        </tr>
                       ";
                   }
                   $conn = NULL;
@@ -345,9 +352,9 @@ if($_SESSION['role'] != 'Student'){
         </form>
       </section>
 
-      <section id="register-new-semester" method="post" action="back/registerNewSemester.php">
+      <section id="register-new-semester">
         <h2>Register for a new Semester</h2>
-        <form id="register-new-semester-form">
+        <form id="register-new-semester-form" method="post" action="back/registerNewSemester.php">
           <div>
             <label>What services would you demand</label><br>
             
@@ -374,9 +381,9 @@ if($_SESSION['role'] != 'Student'){
         </form>
       </section>
 
-      <section id="drop-course" method="post" action="back/dropCourse.php">
+      <section id="drop-course">
         <h2>Drop courses</h2>
-        <form id="drop-course-form">
+        <form id="drop-course-form" method="post" action="back/dropCourse.php">
           <div class="">
             <label for="course-code2">Course Code</label>
             <input
